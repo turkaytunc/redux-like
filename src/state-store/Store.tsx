@@ -1,29 +1,10 @@
 import React from "react";
 import { Actions } from "./Actions";
-import { IPost } from "./IPost";
-
-interface IPosts {
-  posts: Array<IPost>;
-}
+import { IPosts } from "./interfaces/IPosts";
+import { postReducer } from "./reducers/postReducer";
 
 const initialState: IPosts = {
   posts: [],
-};
-
-const reducer = (state: IPosts, action: Actions): IPosts => {
-  switch (action.type) {
-    case "ADD":
-      const { userId, id, title, body } = action.payload;
-      return { ...state, posts: [...state.posts, { userId, id, title, body }] };
-    case "REMOVE":
-      console.log(action.payload);
-      return {
-        ...state,
-        posts: [...state.posts.filter((e) => e.id !== action.payload)],
-      };
-    default:
-      return state;
-  }
 };
 
 export const Store = React.createContext<{
@@ -32,7 +13,7 @@ export const Store = React.createContext<{
 }>({ state: initialState, dispatch: () => null });
 
 export const StoreProvider: React.FC = (props: any): JSX.Element => {
-  const [state, dispatch] = React.useReducer(reducer, initialState);
+  const [state, dispatch] = React.useReducer(postReducer, initialState);
 
   return (
     <Store.Provider value={{ state, dispatch }}>

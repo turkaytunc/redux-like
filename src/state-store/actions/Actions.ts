@@ -1,4 +1,4 @@
-import { IPost } from "./IPost";
+import { IPost } from "./interfaces/IPost";
 
 export type Actions =
   | {
