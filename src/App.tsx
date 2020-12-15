@@ -1,16 +1,20 @@
 import React from "react";
 import "./app.scss";
 import { Store } from "./state-store/Store";
+import { IPost } from "./state-store/interfaces/IPost";
 
 function App(): JSX.Element {
   const { state, dispatch } = React.useContext(Store);
   const [input, setInput] = React.useState("");
 
   const addPost = () => {
-    dispatch({
-      type: "ADD",
-      payload: JSON.parse(input),
-    });
+    const parsed = JSON.parse(input);
+    if (parsed.hasOwnProperty("id")) {
+      dispatch({
+        type: "ADD",
+        payload: parsed,
+      });
+    }
   };
 
   const deletePost = (
@@ -33,7 +37,7 @@ function App(): JSX.Element {
           setInput(e.target.value)
         }
       />
-      <button onClick={() => addPost()}>Add</button>
+      <button onClick={() => addPost()}>Add Post</button>
       <hr />
 
       {state.posts.map((e) => (
@@ -45,6 +49,7 @@ function App(): JSX.Element {
             onClick={(event: React.FormEvent<HTMLButtonElement>) =>
               deletePost(e.id, event)
             }
+            style={{ fontSize: "2em" }}
           >
             &times;
           </button>

@@ -1,4 +1,4 @@
-import { Actions } from "../Actions";
+import { Actions } from "../actions/Actions";
 import { IPosts } from "../interfaces/IPosts";
 
 export const postReducer = (state: IPosts, action: Actions): IPosts => {
