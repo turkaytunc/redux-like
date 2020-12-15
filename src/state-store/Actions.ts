@@ -7,5 +7,5 @@ export type Actions =
     }
   | {
       type: "REMOVE";
-      payload: IPost;
+      payload: number;
     };

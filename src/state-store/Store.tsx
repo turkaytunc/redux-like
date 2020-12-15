@@ -12,13 +12,15 @@ const initialState: IPosts = {
 
 const reducer = (state: IPosts, action: Actions): IPosts => {
   switch (action.type) {
-    case "ADD": {
+    case "ADD":
       const { userId, id, title, body } = action.payload;
       return { ...state, posts: [...state.posts, { userId, id, title, body }] };
-    }
     case "REMOVE":
-      const { id } = action.payload;
-      return { ...state, posts: [...state.posts.filter((e) => e.id !== id)] };
+      console.log(action.payload);
+      return {
+        ...state,
+        posts: [...state.posts.filter((e) => e.id !== action.payload)],
+      };
     default:
       return state;
   }
@@ -26,7 +28,7 @@ const reducer = (state: IPosts, action: Actions): IPosts => {
 
 export const Store = React.createContext<{
   state: IPosts;
-  dispatch: React.Dispatch<any>;
+  dispatch: React.Dispatch<Actions>;
 }>({ state: initialState, dispatch: () => null });
 
 export const StoreProvider: React.FC = (props: any): JSX.Element => {
