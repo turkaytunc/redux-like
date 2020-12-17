@@ -7,7 +7,6 @@ export const postReducer = (state: IPosts, action: Actions): IPosts => {
       const { userId, id, title, body } = action.payload;
       return { ...state, posts: [...state.posts, { userId, id, title, body }] };
     case "REMOVE":
-      console.log(action.payload);
       return {
         ...state,
         posts: [...state.posts.filter((e) => e.id !== action.payload)],

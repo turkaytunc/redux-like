@@ -1,7 +1,6 @@
 import React from "react";
 import "./app.scss";
 import { Store } from "./state-store/Store";
-import { IPost } from "./state-store/interfaces/IPost";
 
 function App(): JSX.Element {
   const { state, dispatch } = React.useContext(Store);
@@ -17,11 +16,7 @@ function App(): JSX.Element {
     }
   };
 
-  const deletePost = (
-    id: number,
-    event: React.FormEvent<HTMLButtonElement>
-  ) => {
-    event.preventDefault();
+  const deletePost = (id: number) => {
     dispatch({
       type: "REMOVE",
       payload: id,
@@ -45,12 +40,7 @@ function App(): JSX.Element {
           <div>title: {e.title}</div>
           <hr />
           <div>{e.body}</div>
-          <button
-            onClick={(event: React.FormEvent<HTMLButtonElement>) =>
-              deletePost(e.id, event)
-            }
-            style={{ fontSize: "2em" }}
-          >
+          <button onClick={() => deletePost(e.id)} style={{ fontSize: "2em" }}>
             &times;
           </button>
         </div>
