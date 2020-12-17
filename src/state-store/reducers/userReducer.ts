@@ -1,21 +1,16 @@
 import { UserActions } from "../actions/UserActions";
 import { IUser } from "../interfaces/IUser";
 
-interface IUsers {
-  users: IUser[];
-}
-
-export const UserReducer = (state: IUsers, action: UserActions): IUsers => {
+export const userReducer = (state: IUser[], action: UserActions): IUser[] => {
   switch (action.type) {
     case "ADD_USER": {
       const { id, name, isAdmin } = action.payload;
-      return { ...state, users: [...state.users, { id, name, isAdmin }] };
+      return [...state, { id, name, isAdmin }];
     }
     case "REMOVE_USER": {
       const id = action.payload;
-      return { ...state, users: [...state.users.filter((e) => e.id !== id)] };
+      return [...state.filter((e) => e.id !== id)];
     }
-
     default:
       return state;
   }
