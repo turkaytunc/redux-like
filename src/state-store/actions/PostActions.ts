@@ -1,11 +1,11 @@
 import { IPost } from "../interfaces/IPost";
 
-export type Actions =
+export type PostActions =
   | {
-      type: "ADD";
+      type: "ADD_POST";
       payload: IPost;
     }
   | {
-      type: "REMOVE";
+      type: "REMOVE_POST";
       payload: number;
     };
