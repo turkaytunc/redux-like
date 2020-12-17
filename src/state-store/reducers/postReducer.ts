@@ -1,12 +1,16 @@
-import { Actions } from "../actions/Actions";
-import { IPosts } from "../interfaces/IPosts";
+import { PostActions } from "../actions/PostActions";
+import { IPost } from "../interfaces/IPost";
 
-export const postReducer = (state: IPosts, action: Actions): IPosts => {
+interface IPosts {
+  posts: Array<IPost>;
+}
+
+export const postReducer = (state: IPosts, action: PostActions): IPosts => {
   switch (action.type) {
-    case "ADD":
+    case "ADD_POST":
       const { userId, id, title, body } = action.payload;
       return { ...state, posts: [...state.posts, { userId, id, title, body }] };
-    case "REMOVE":
+    case "REMOVE_POST":
       return {
         ...state,
         posts: [...state.posts.filter((e) => e.id !== action.payload)],
