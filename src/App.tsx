@@ -1,11 +1,11 @@
 import React from 'react';
 import './app.scss';
+import UserList from './components/user-list/UserList';
 import { Store } from './state-store/Store';
 
 function App(): JSX.Element {
   const { state, dispatch } = React.useContext(Store);
   const [input, setInput] = React.useState('');
-  const [userInput, setUserInput] = React.useState('');
 
   const addPost = () => {
     const parsed = JSON.parse(input);
@@ -24,39 +24,9 @@ function App(): JSX.Element {
     });
   };
 
-  const addUser = () => {
-    dispatch({
-      type: 'ADD_USER',
-      payload: JSON.parse(userInput),
-    });
-  };
-
-  const deleteUser = (id: number) => {
-    dispatch({
-      type: 'REMOVE_USER',
-      payload: id,
-    });
-  };
-
   return (
     <main className="App">
-      <div className="user-container">
-        <input
-          type="text"
-          value={userInput}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUserInput(e.target.value)}
-        />
-        <button onClick={() => addUser()}>Add User</button>
-        {state.users.map((e) => (
-          <div key={e.id}>
-            <div>userName: {e.name}</div>
-            <div>userRole: {e.isAdmin ? 'Admin' : 'Pleb'}</div>
-            <button onClick={() => deleteUser(e.id)} style={{ fontSize: '2em' }}>
-              &times;
-            </button>
-          </div>
-        ))}
-      </div>
+      <UserList />
       <hr />
       <br />
       <div className="post-container">
