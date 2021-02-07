@@ -7,6 +7,7 @@ function App(): JSX.Element {
   return (
     <main className="App">
       <UserList />
+      <br />
       <hr />
       <br />
       <PostList />
