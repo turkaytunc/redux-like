@@ -1,3 +1,3 @@
-# State-with-context-and-reducer
+# Redux-like
 
 Redux like state management example with context, reducer, typescript
